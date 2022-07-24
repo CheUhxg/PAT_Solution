@@ -43,19 +43,19 @@ void dijkstra(const vector<vector<int>>& graph) {
 	}
 }
 
-int main() {
-	cin >> n >> m >> c1 >> c2;
-	rescues.resize(n);
-	path.resize(n);
-	max_num.resize(n);
-	vector<vector<int>> graph(n, vector<int>(n, INF));
-	for (int i = 0; i < n; ++i)cin >> rescues[i];
-	for (int i = 0; i < m; ++i) {
-		cin >> s >> e >> dis;
-		graph[s][e] = dis;
-		graph[e][s] = dis;
-	}
-	dijkstra(graph);
-
-	cout << path[c2] << ' ' << max_num[c2] << endl;
-}
+//int main() {
+//	cin >> n >> m >> c1 >> c2;
+//	rescues.resize(n);
+//	path.resize(n);
+//	max_num.resize(n);
+//	vector<vector<int>> graph(n, vector<int>(n, INF));
+//	for (int i = 0; i < n; ++i)cin >> rescues[i];
+//	for (int i = 0; i < m; ++i) {
+//		cin >> s >> e >> dis;
+//		graph[s][e] = dis;
+//		graph[e][s] = dis;
+//	}
+//	dijkstra(graph);
+//
+//	cout << path[c2] << ' ' << max_num[c2] << endl;
+//}
