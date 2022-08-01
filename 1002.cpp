@@ -3,8 +3,8 @@
 
 using namespace std;
 
-float map[1001];
 //int main() {
+//	float map[1001];
 //  int k, a, cnt;
 //  double b;
 //  cin >> k;

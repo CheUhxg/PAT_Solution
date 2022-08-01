@@ -5,7 +5,7 @@
 
 using namespace std;
 
-struct p {
+static struct p {
 	string id, start, end;
 };
 

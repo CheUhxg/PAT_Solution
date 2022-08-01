@@ -5,12 +5,12 @@
 
 using namespace std;
 
-struct Poly {
+static struct Poly {
 	int N;
 	double a;
 };
 
-double m[2005];
+static double m[2005];
 
 //int main() {
 //	vector<Poly> A;

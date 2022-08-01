@@ -5,7 +5,7 @@
 
 using namespace std;
 
-unordered_map<char, string> um{
+static unordered_map<char, string> um{
 	{'1', "one"},
 	{'2', "two"},
 	{'3', "three"},

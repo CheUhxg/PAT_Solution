@@ -6,10 +6,10 @@
 
 using namespace std;
 
-int n, m, c1, c2, s, e, dis;
-vector<int> rescues, max_num, path;
+static int n, m, c1, c2, s, e, dis;
+static vector<int> rescues, max_num, path;
 
-void dijkstra(const vector<vector<int>>& graph) {
+static void dijkstra(const vector<vector<int>>& graph) {
 	vector<bool>visited(n, false);
 	vector<int>distance(n, INF);
 	distance[c1] = 0;

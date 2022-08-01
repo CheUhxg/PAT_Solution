@@ -6,11 +6,11 @@
 
 using namespace std;
 
-struct Grades {
+static struct Grades {
 	int A, C, M, E;
 };
 
-unordered_map<string, Grades>students;
+static unordered_map<string, Grades>students;
 
 //int main() {
 //	int n, m;	cin >> n >> m; cin.get();

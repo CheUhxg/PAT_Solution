@@ -7,7 +7,7 @@
 
 using namespace std;
 
-struct Record {
+static struct Record {
 	string name, time;
 	bool on;
 };

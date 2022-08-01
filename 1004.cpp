@@ -4,9 +4,9 @@
 
 using namespace std;
 
-short max_layer;
+static short max_layer;
 
-void dfs(const vector<vector<short>>& sons, map<short, short>& res, const short index, const short layer) {
+static void dfs(const vector<vector<short>>& sons, map<short, short>& res, const short index, const short layer) {
 	if (layer > max_layer)max_layer = layer;
 	if (sons[index].size() == 0) {
 		++res[layer];

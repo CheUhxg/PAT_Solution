@@ -3,7 +3,7 @@
 
 using namespace std;
 
-long long GetDecimal(const string& n, const int old_radix) {
+static long long GetDecimal(const string& n, const int old_radix) {
 	long long res = 0, base = 1;
 	int num;
 	for (int i = n.size() - 1; i >= 0; --i) {

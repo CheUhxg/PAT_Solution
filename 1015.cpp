@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int parse(int n, const int d) {
+static int parse(int n, const int d) {
 	int res = 0;
 
 	while (n > 0) {
@@ -15,7 +15,7 @@ int parse(int n, const int d) {
 	return res;
 }
 
-bool isPrime(const int d) {
+static bool isPrime(const int d) {
 	if (d <= 1)return false;
 	for (int i = 2; i * i <= d; ++i) {
 		if (d % i == 0)

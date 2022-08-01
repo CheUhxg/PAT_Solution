@@ -4,9 +4,9 @@
 
 using namespace std;
 
-unordered_set<int> visited;
+static unordered_set<int> visited;
 
-void dfs(const vector<vector<int>>& g, const int index) {
+static void dfs(const vector<vector<int>>& g, const int index) {
 	for (int next : g[index]) {
 		if (visited.count(next) == 0) {
 			visited.insert(next);
