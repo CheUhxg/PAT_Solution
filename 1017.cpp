@@ -28,6 +28,9 @@ int main() {
 	for (int time = 28800; next < n && customers[next].start <= 61200; ++time) {
 		for (int i = 0; i < k && next < n; ++i) {
 			now = windows[i];
+			if (now >= 0 && customers[now].end == time) {
+				now = windows[i] = -1;
+			}
 			if (now < 0) {
 				if (customers[next].start <= 61200 && customers[next].start <= time) {
 					cnt += time - customers[next].start;
@@ -36,10 +39,10 @@ int main() {
 				}
 				else if(customers[next].start > 61200)break;
 			}
-			else if (customers[now].end == time) {
-				windows[i] = -1;
-			}
 		}
 	}
-	printf("%.1f\n", cnt / (60.0 * next));
+	if (next == 0)
+		printf("0.0\n");
+	else
+		printf("%.1f\n", cnt / (60.0 * next));
 }
