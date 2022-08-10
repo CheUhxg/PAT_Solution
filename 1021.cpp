@@ -4,69 +4,65 @@
 
 using namespace std;
 
-vector<int> res;
-int n, max_depth;
-
-int dfs(int index, vector<bool>& visited, const vector<vector<int>>& g) {
-	int depth = 0, tmp;
+int dfs(int index, int depth, vector<bool>& visited, const vector<vector<int>>& g) {
+	visited[index] = true;
+	int max_depth = depth;
 	for (int i = 0; i < g[index].size(); ++i) {
 		if (!visited[g[index][i]]) {
-			visited[g[index][i]] = true;
-			tmp = dfs(g[index][i], visited, g);
-			visited[g[index][i]] = false;
-			if (tmp > depth)depth = tmp;
+			max_depth = max(max_depth, dfs(g[index][i], depth + 1, visited, g));
 		}
 	}
-	return depth + 1;
+	return max_depth;
 }
 
 int main() {
-	int a, b, cnt = 0, fa;
+	int a, b, cnt = 1, min_degree = 0x3fffffff, n, max_cnt = 0;
 	cin >> n;
 	vector<vector<int>>g(n + 1);
-	vector<int> father(n + 1);
+	vector<int> father(n + 1), in_degree(n + 1), res;
 	for (int i = 1; i < n; ++i) {
 		cin >> a >> b;
 		g[a].push_back(b);
 		g[b].push_back(a);
+		++in_degree[a];
+		++in_degree[b];
 	}
 	for (int i = 1; i <= n; ++i) {
 		father[i] = i;
-	}
-	for (int i = 1; i <= n; ++i) {
-		for (int j = 0; j < g[i].size(); ++j) {
-			if (i < g[i][j])
-				fa = father[i];
-			else
-				fa = father[g[i][j]];
-			while (fa != father[fa])fa = father[fa];
-			father[i] = father[g[i][j]] = fa;
+		min_degree = min(min_degree, in_degree[i]);
+		if (in_degree[i] < min_degree) {
+			min_degree = in_degree[i];
 		}
 	}
-	fa = 0;
-	for (int i = 1; i <= n; ++i) {
-		if (father[i] > fa) {
-			fa = father[i];
+	vector<bool> visited(n + 1, false);
+	dfs(1, 0, visited, g);
+	for (int i = 2; i <= n; ++i) {
+		if (!visited[i]) {
 			++cnt;
+			dfs(i, 0, visited, g);
 		}
 	}
+
 	if (cnt > 1) {
 		cout << "Error: " << cnt << " components\n";
 		return 0;
 	}
-	vector<bool> visited(n + 1, false);
+
 	for (int i = 1; i <= n; ++i) {
-		visited[i] = true;
-		cnt = dfs(i, visited, g);
-		visited[i] = false;
-		if (max_depth == cnt) {
-			res.push_back(i);
-		}
-		else if (max_depth < cnt) {
-			max_depth = cnt;
-			res = { i };
+		if (in_degree[i] == min_degree) {
+			visited.clear();
+			visited.resize(n + 1, false);
+			cnt = dfs(i, 0, visited, g);
+			if (max_cnt == cnt) {
+				res.push_back(i);
+			}
+			else if (max_cnt < cnt) {
+				max_cnt = cnt;
+				res = { i };
+			}
 		}
 	}
+	sort(res.begin(), res.end(), less<int>());
 	for (const int node : res) {
 		cout << node << endl;
 	}
