@@ -4,9 +4,9 @@
 
 using namespace std;
 
-vector<vector<int>> tree;
+static vector<vector<int>> tree;
 
-void MakeTree(const vector<int>& postorder, const vector<int>& inorder, const int layer) {
+static void MakeTree(const vector<int>& postorder, const vector<int>& inorder, const int layer) {
 	if (postorder.size() == 0)return;
 	int last_in = find(inorder.begin(), inorder.end(), postorder.back()) - inorder.begin();
 	vector<int>post_left(postorder.begin(), postorder.begin() + last_in);
@@ -23,21 +23,21 @@ void MakeTree(const vector<int>& postorder, const vector<int>& inorder, const in
 	MakeTree(post_right, in_right, layer + 1);
 }
 
-int main() {
-	int n; cin >> n;
-	vector<int> postorder(n), inorder(n);
-	for (int i = 0; i < n; ++i) {
-		cin >> postorder[i];
-	}
-	for (int i = 0; i < n; ++i) {
-		cin >> inorder[i];
-	}
-	MakeTree(postorder, inorder, 0);
-	cout << tree[0][0];
-	for (int i = 1; i < tree.size(); ++i) {
-		for (int j = 0; j < tree[i].size(); ++j) {
-			cout << ' ' << tree[i][j];
-		}
-	}
-	cout << endl;
-}
+//int main() {
+//	int n; cin >> n;
+//	vector<int> postorder(n), inorder(n);
+//	for (int i = 0; i < n; ++i) {
+//		cin >> postorder[i];
+//	}
+//	for (int i = 0; i < n; ++i) {
+//		cin >> inorder[i];
+//	}
+//	MakeTree(postorder, inorder, 0);
+//	cout << tree[0][0];
+//	for (int i = 1; i < tree.size(); ++i) {
+//		for (int j = 0; j < tree[i].size(); ++j) {
+//			cout << ' ' << tree[i][j];
+//		}
+//	}
+//	cout << endl;
+//}
