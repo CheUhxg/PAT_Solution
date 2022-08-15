@@ -4,14 +4,14 @@
 
 using namespace std;
 
-bool isPalin(string n) {
+static bool isPalin(string n) {
 	for (int i = 0; i < n.size() / 2;++i) {
 		if (n[i] != n[n.size() - i - 1])return false;
 	}
 	return true;
 }
 
-void changeN(string& n) {
+static void changeN(string& n) {
 	string tmp(n);
 	int add = 0, num;
 	for (int i = 0; i < n.size(); ++i) {
@@ -24,17 +24,17 @@ void changeN(string& n) {
 	}
 }
 
-int main() {
-	string n;
-	int k, i;
-	cin >> n >> k;
-	reverse(n.begin(), n.end());
-	for (i = 0; i < k; ++i) {
-		if (isPalin(n))break;
-		changeN(n);
-	}
-	reverse(n.begin(), n.end());
-
-	cout << n << endl
-		<< i << endl;
-}
+//int main() {
+//	string n;
+//	int k, i;
+//	cin >> n >> k;
+//	reverse(n.begin(), n.end());
+//	for (i = 0; i < k; ++i) {
+//		if (isPalin(n))break;
+//		changeN(n);
+//	}
+//	reverse(n.begin(), n.end());
+//
+//	cout << n << endl
+//		<< i << endl;
+//}
