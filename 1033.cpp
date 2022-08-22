@@ -5,7 +5,7 @@
 using namespace std;
 
 struct Station {
-	float price;
+	double price;
 	int distance;
 };
 
@@ -14,7 +14,7 @@ bool cmp(const Station& s1, const Station& s2) {
 }
 
 int main() {
-	float cost = 0.0;
+	double cost = 0.0;
 	int cmax, dall, davg, n, cnow = 0; cin >> cmax >> dall >> davg >> n;
 	vector<Station> stations(n);
 	vector<bool> visited(dall, false);
