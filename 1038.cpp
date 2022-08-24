@@ -6,14 +6,7 @@
 using namespace std;
 
 bool cmp(const string& num1, const string& num2) {
-	int index = 0;
-	while (index < num1.size() && index < num2.size()) {
-		if (num1[index] != num2[index])return num1[index] < num2[index];
-		++index;
-	}
-	if (index < num1.size()) return cmp(num1.substr(index), num2);
-	if (index < num2.size()) return cmp(num1, num2.substr(index));
-	return true;
+	return num1 + num2 < num2 + num1;
 }
 
 int main() {
