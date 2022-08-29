@@ -4,63 +4,41 @@
 
 using namespace std;
 
-struct BST {
-	int v;
-	BST* left = nullptr, * right = nullptr;
-	BST(int v, BST* left, BST* right) : v(v), left(left), right(right) {}
-};
-int n;
-bool isBST = true;
-
-BST* buildBST(const int begin, const int end,
-							const bool isMirror, const vector<int>& tree) {
-	if (!isBST || begin > end)return nullptr;
-	if (begin == end)return new BST(tree[begin], nullptr, nullptr);
+void buildBST(const int begin, const int end,	const bool isMirror,
+							const vector<int>& pre, vector<int>& post) {
+	if (begin > end)return;
 	int left = begin + 1, right = end;
-	for (int i = left; i <= end; ++i) {
-		if (isMirror && tree[i] < tree[begin] || 
-				!isMirror && tree[i] >= tree[begin]) {
-			right = i;
-			break;
-		}
+	if (isMirror) {
+		while (left <= end && pre[left] >= pre[begin])++left;
+		while (right >= left && pre[right] < pre[begin])--right;
 	}
-	for (int i = right + 1; i <= end; ++i) {
-		if (isMirror && tree[i] >= tree[begin] ||
-				!isMirror && tree[i] < tree[begin]) {
-			isBST = false;
-			return nullptr;
-		}
+	else {
+		while (left <= end && pre[left] < pre[begin])++left;
+		while (right >= left && pre[right] >= pre[begin])--right;
 	}
-	if (isBST) {
-		BST* root = new BST(tree[begin], nullptr, nullptr);
-		root->left = buildBST(left, right - 1, isMirror, tree);
-		root->right = buildBST(right, end, isMirror, tree);
-		return root;
-	}
-}
-
-void printPostOrder(const BST* root, BST* node) {
-	if (node->left)printPostOrder(root, node->left);
-	if (node->right)printPostOrder(root, node->right);
-	cout << node->v;
-	if (node != root)cout << ' ';
+	buildBST(begin + 1, left - 1, isMirror, pre, post);
+	buildBST(right + 1, end, isMirror, pre, post);
+	post.push_back(pre[begin]);
 }
 
 int main() {
-	cin >> n;
-	vector<int> tree(n);
+	int n; cin >> n;
+	vector<int> pre(n), post;
 	for (int i = 0; i < n; ++i) {
-		cin >> tree[i];
+		cin >> pre[i];
 	}
-	BST* root = buildBST(0, tree.size() - 1, false, tree);
-	if (!isBST) {
-		isBST = true;
-		root = buildBST(0, tree.size() - 1, true, tree);
+	buildBST(0, pre.size() - 1, false, pre, post);
+	if (post.size() < n) {
+		post.clear();
+		buildBST(0, pre.size() - 1, true, pre, post);
 	}
-	if (!isBST)cout << "NO" << endl;
+	if (post.size() < n)cout << "NO" << endl;
 	else {
 		cout << "YES" << endl;
-		printPostOrder(root, root);
+		cout << post[0];
+		for (int i = 1; i < n; ++i) {
+			cout << ' ' << post[i];
+		}
 		cout << endl;
 	}
 }
