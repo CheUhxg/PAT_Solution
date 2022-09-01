@@ -26,7 +26,7 @@ int main() {
 		sort(course[i].begin(), course[i].end(), cmp);
 		cout << i << ' ' << course[i].size() << endl;
 		for (const int& id : course[i]) {
-			cout << student[id] << endl;
+			printf("%s\n", student[id].c_str());
 		}
 	}
 }
