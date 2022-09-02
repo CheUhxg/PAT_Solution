@@ -12,7 +12,7 @@ int main() {
 		++cnt[value];
 	}
 	for (int i = 1; i * 2 <= m; ++i) {
-		if (cnt[i] > 0 && cnt[m-i] > 0) {
+		if (m - i <= 500 && cnt[i] > 0 && cnt[m - i] > 0) {
 			if (i * 2 == m && cnt[i] > 1 || i * 2 < m) {
 				a = i;
 				b = m - i;
