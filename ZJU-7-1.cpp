@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int ploy[100];
+static int ploy[100];
 
 //int main() {
 //	int n, a, top = 2; cin >> n >> a;

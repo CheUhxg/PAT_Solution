@@ -10,7 +10,7 @@ static struct Team {
 	int min_id = 0x3fffffff, sum_score = 0;
 	set<int> students;
 };
-vector<Team> teams;
+static vector<Team> teams;
 
 static void Combine(Team& t) {
 	vector<int> index;
