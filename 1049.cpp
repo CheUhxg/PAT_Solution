@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int findOne(int n) {
+static int findOne(int n) {
 	int high, low = 0, mid, res = 0, base = 1;
 	while (n / base > 0) {
 		high = n / base / 10;
@@ -16,7 +16,7 @@ int findOne(int n) {
 	return res;
 }
 
-int main() {
-	int n; cin >> n;
-	cout << findOne(n) << endl;
-}
+//int main() {
+//	int n; cin >> n;
+//	cout << findOne(n) << endl;
+//}
