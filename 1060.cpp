@@ -3,7 +3,7 @@
 
 using namespace std;
 
-string convert(const int n, const string num) {
+static string convert(const int n, const string num) {
 	int size = num.size(), i = 0, count = 0;
 	string temp;
 	for (; i < size && num[i] == '0'; ++i);
@@ -31,12 +31,12 @@ string convert(const int n, const string num) {
 	return temp;
 }
 
-int main() {
-	int n;
-	string num1, num2;
-	cin >> n >> num1 >> num2;
-	string res1 = convert(n, num1);
-	string res2 = convert(n, num2);
-	if (res1 == res2) cout << "YES 0." << res1 << endl;
-	else cout << "NO 0." << res1 << " 0." << res2 << endl;
-}
+//int main() {
+//	int n;
+//	string num1, num2;
+//	cin >> n >> num1 >> num2;
+//	string res1 = convert(n, num1);
+//	string res2 = convert(n, num2);
+//	if (res1 == res2) cout << "YES 0." << res1 << endl;
+//	else cout << "NO 0." << res1 << " 0." << res2 << endl;
+//}
