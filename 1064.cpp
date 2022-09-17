@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int getLeft(int size) {
+static int getLeft(int size) {
 	int base = 1;
 	while ((base - 1) * 2 <= size) {
 		base *= 2;
@@ -15,7 +15,7 @@ int getLeft(int size) {
 	else return base - 1 + size;
 }
 
-void getRes(int index, int start, int len, vector<int>& res, const vector<int>& nums) {
+static void getRes(int index, int start, int len, vector<int>& res, const vector<int>& nums) {
 	if (index > nums.size() || len == 0)return;
 	if (len == 1) {
 		res[index] = nums[start];
@@ -27,17 +27,17 @@ void getRes(int index, int start, int len, vector<int>& res, const vector<int>& 
 	getRes(index * 2 + 2, start + left + 1, len - left - 1, res, nums);
 }
 
-int main() {
-	int n; cin >> n;
-	vector<int>nums(n), res(n);
-	for (int i = 0; i < n; ++i) {
-		cin >> nums[i];
-	}
-	sort(nums.begin(), nums.end());
-	getRes(0, 0, n, res, nums);
-	cout << res[0];
-	for (int i = 1; i < n; ++i) {
-		cout << ' ' << res[i];
-	}
-	cout << endl;
-}
+//int main() {
+//	int n; cin >> n;
+//	vector<int>nums(n), res(n);
+//	for (int i = 0; i < n; ++i) {
+//		cin >> nums[i];
+//	}
+//	sort(nums.begin(), nums.end());
+//	getRes(0, 0, n, res, nums);
+//	cout << res[0];
+//	for (int i = 1; i < n; ++i) {
+//		cout << ' ' << res[i];
+//	}
+//	cout << endl;
+//}
