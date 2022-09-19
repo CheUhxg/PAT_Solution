@@ -63,5 +63,5 @@ int main() {
         cin >> val;
         root = Insert(root, val);
     }
-    cout << root->val << endl;
+    cout << root->val;
 }
