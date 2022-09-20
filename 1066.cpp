@@ -2,41 +2,41 @@
 
 using namespace std;
 
-struct Node {
+static struct Node {
     int val;
     struct Node* left, * right;
 };
 
-Node* rotateLeft(Node* root) {
+static Node* rotateLeft(Node* root) {
     Node* tmp = root->right;
     root->right = tmp->left;
     tmp->left = root;
     return tmp;
 }
 
-Node* rotateRight(Node* root) {
+static Node* rotateRight(Node* root) {
     Node* tmp = root->left;
     root->left = tmp->right;
     tmp->right = root;
     return tmp;
 }
 
-Node* rotateLeftRight(Node* root) {
+static Node* rotateLeftRight(Node* root) {
     root->left = rotateLeft(root->left);
     return rotateRight(root);
 }
 
-Node* rotateRightLeft(Node* root) {
+static Node* rotateRightLeft(Node* root) {
     root->right = rotateRight(root->right);
     return rotateLeft(root);
 }
 
-int getHeight(Node* root) {
+static int getHeight(Node* root) {
     if (root == NULL) return 0;
     return max(getHeight(root->left), getHeight(root->right)) + 1;
 }
 
-Node* Insert(Node* root, int val) {
+static Node* Insert(Node* root, int val) {
     if (root == NULL) {
         root = new Node();
         root->val = val;
@@ -55,13 +55,13 @@ Node* Insert(Node* root, int val) {
     return root;
 }
 
-int main() {
-    Node* root = nullptr;
-    int n, val;
-    cin >> n;
-    for (int i = 0; i < n; i++) {
-        cin >> val;
-        root = Insert(root, val);
-    }
-    cout << root->val;
-}
+//int main() {
+//    Node* root = nullptr;
+//    int n, val;
+//    cin >> n;
+//    for (int i = 0; i < n; i++) {
+//        cin >> val;
+//        root = Insert(root, val);
+//    }
+//    cout << root->val;
+//}
