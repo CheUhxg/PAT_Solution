@@ -6,8 +6,7 @@
 using namespace std;
 
 struct Cake {
-	int weight;
-	double price;
+	double price, weight;
 };
 
 bool cmp(const Cake& c1, const Cake& c2) {
@@ -15,7 +14,8 @@ bool cmp(const Cake& c1, const Cake& c2) {
 }
 
 int main() {
-	int n, d; cin >> n >> d;
+	double d;
+	int n; cin >> n >> d;
 	double cnt = 0;
 	vector<Cake> cakes(n);
 	for (int i = 0; i < n; ++i) {
