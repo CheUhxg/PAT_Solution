@@ -23,7 +23,11 @@ int main() {
 		res.push_back(nodes[start]);
 		start = res.back().next;
 	}
-	reverse(res.begin(), res.begin() + k);
+	int low = 0;
+	while (low + k <= res.size()) {
+		reverse(res.begin() + low, res.begin() + low + k);
+		low += k;
+	}
 	for (int i = 0; i < res.size(); ++i) {
 		printf("%05d %d ", res[i].add, res[i].data);
 		if(i < res.size() - 1)
