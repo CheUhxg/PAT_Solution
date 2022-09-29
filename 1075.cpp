@@ -6,10 +6,11 @@
 using namespace std;
 
 struct Student {
+    bool visited;
     int id, totle, perfect;
     vector<int>problem;
     Student(const vector<int>& problem)
-        : id(0), totle(0), perfect(0), problem(problem) {}
+        : visited(false), id(0), totle(0), perfect(0), problem(problem) {}
 };
 
 bool cmp(const Student& s1, const Student& s2) {
@@ -30,33 +31,35 @@ int main() {
     while(m--) {
         cin >> id >> prob >> score;
         students[id].id = id;
-        if(score == -1 && students[id].problem[prob] == -1) {
-            students[id].problem[prob] = 0;
-        }
-        else if(students[id].problem[prob] < score) {
-            if(students[id].problem[prob] == -1)
-                students[id].totle += score;
-            else 
-                students[id].totle += score - students[id].problem[prob];
-            students[id].problem[prob] = score;
-            if(score == full_score[prob]) {
-                ++students[id].perfect;
-            }
+        students[id].problem[prob] = max(score, students[id].problem[prob]);
+        if(score != -1)students[id].visited = true;
+        else if(students[id].problem[prob] == -1) students[id].problem[prob] = -2;
+    }
+    for(int i = 1; i <= n; ++i) {
+        for(int j = 1; j <= k; ++j) {
+            if(students[i].problem[j] != -1 && students[i].problem[j] != -2)
+                students[i].totle += students[i].problem[j];
+            if(students[i].problem[j] == full_score[j])
+                ++students[i].perfect;
         }
     }
-    sort(students.begin(), students.end(), cmp);
-    for(int i = 0; i < n; ++i) {
-        if(students[i].totle == 0)break;
-        if(i > 0 && students[i].totle < students[i-1].totle)rk = i + 1;
-        printf("%d %05d %d", rk, students[i].id, students[i].totle);
-        for(int j = 1; j <= k; ++j) {
-            if(students[i].problem[j] >= 0) {
-                printf(" %d", students[i].problem[j]);
+    sort(students.begin() + 1, students.end(), cmp);
+    for(int i = 1; i <= n; ++i) {
+        if(students[i].visited) {
+            if(i > 0 && students[i].totle < students[i-1].totle)rk = i;
+            printf("%d %05d %d", rk, students[i].id, students[i].totle);
+            for(int j = 1; j <= k; ++j) {
+                if(students[i].problem[j] != -1 && students[i].problem[j] != -2) {
+                    printf(" %d", students[i].problem[j]);
+                }
+                else if(students[i].problem[j] == -1){
+                    printf(" -");
+                }
+                else {
+                    printf(" 0");
+                }
             }
-            else {
-                printf(" -");
-            }
+            printf("\n");
         }
-        printf("\n");
     }
 }
