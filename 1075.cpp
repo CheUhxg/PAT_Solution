@@ -46,7 +46,8 @@ int main() {
     sort(students.begin() + 1, students.end(), cmp);
     for(int i = 1; i <= n; ++i) {
         if(students[i].visited) {
-            if(i > 0 && students[i].totle < students[i-1].totle)rk = i;
+            if(students[i].totle == 0)++rk;
+            if(students[i].totle < students[i-1].totle)rk = i;
             printf("%d %05d %d", rk, students[i].id, students[i].totle);
             for(int j = 1; j <= k; ++j) {
                 if(students[i].problem[j] != -1 && students[i].problem[j] != -2) {
