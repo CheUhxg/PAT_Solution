@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int bfs(int id, int layer,
+static int bfs(int id, int layer,
          const vector<vector<int>>& follower) {
     unordered_set<int> visited;
     queue<int> q;
@@ -27,20 +27,20 @@ int bfs(int id, int layer,
     return visited.size() - 1;
 }
 
-int main() {
-    int n, l, k, id; cin >> n >> l;
-    vector<vector<int>> follower(n + 1);
-    for(int i = 1; i <= n; ++i) {
-        int totle, follow;
-        cin >> totle;
-        while(totle--) {
-            cin >> follow;
-            follower[follow].push_back(i);
-        }
-    }
-    cin >> k;
-    while(k--) {
-        cin >> id;
-        cout << bfs(id, l, follower) << endl;
-    }
-}
+//int main() {
+//    int n, l, k, id; cin >> n >> l;
+//    vector<vector<int>> follower(n + 1);
+//    for(int i = 1; i <= n; ++i) {
+//        int totle, follow;
+//        cin >> totle;
+//        while(totle--) {
+//            cin >> follow;
+//            follower[follow].push_back(i);
+//        }
+//    }
+//    cin >> k;
+//    while(k--) {
+//        cin >> id;
+//        cout << bfs(id, l, follower) << endl;
+//    }
+//}
