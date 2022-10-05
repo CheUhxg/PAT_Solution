@@ -40,7 +40,6 @@ int main() {
     }
     cin >> k;
     while(k--) {
-        int last = -1;
         cin >> id;
         cout << bfs(id, l, follower) << endl;
     }
