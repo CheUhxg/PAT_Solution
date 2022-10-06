@@ -5,16 +5,19 @@ using namespace std;
 
 int main() {
     int m, n, t = -1; cin >> m >> n;
-    vector<bool>isPrime(m, true);
-    for(int i = 1; i <= m; ++i) {
-        for(int j = i; j >= 2; --j) {
-            if(i * j >= m && i * j < 2 * m) {
-                isPrime[i * j - m] = false;
+    if(m == 1)t = 2;
+    else {
+        vector<bool>isPrime(m, true);
+        for(int i = 1; i <= m; ++i) {
+            for(int j = i; j >= 2; --j) {
+                if(i * j >= m && i * j < 2 * m) {
+                    isPrime[i * j - m] = false;
+                }
             }
         }
+        while(!isPrime[++t]);
+        t += m;
     }
-    while(!isPrime[++t]);
-    t += m;
     vector<bool>visited(t, false);
     while(n--) {
         cin >> m;
