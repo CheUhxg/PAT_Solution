@@ -6,7 +6,7 @@
 using namespace std;
 
 struct List {
-    int max = 0;
+    int cnt = 0;
     vector<int>list;
 };
 
@@ -17,7 +17,6 @@ struct Grade {
 
 bool cmp(const Grade& g1, const Grade& g2) {
     if(g1.sum == g2.sum) {
-        if(g1.ge > g2.ge)return g1.id < g2.id;
         return g1.ge > g2.ge;
     }
     return g1.sum > g2.sum;
@@ -28,7 +27,7 @@ int main() {
     vector<Grade>student(n);
     vector<List>school(m);
     for(int i = 0; i < m; ++i) {
-        cin >> school[i].max;
+        cin >> school[i].cnt;
     }
     for(int i = 0; i < n; ++i) {
         student[i].id = i;
@@ -48,12 +47,15 @@ int main() {
             student[i].rk = student[i - 1].rk + 1;
         }
     }
+    vector<int>last(m, -1);
     for(int i = 0; i < n; ++i) {
         for(int j = 0; j < k; ++j) {
             int school_id = student[i].list[j];
-            if(school[school_id].list.size() < school[school_id].max ||
-                student[school[school_id].list.back()].rk == student[i].rk) {
+            if(school[school_id].cnt > 0 ||
+                last[school_id] == student[i].rk) {
+                --school[school_id].cnt;
                 school[school_id].list.push_back(student[i].id);
+                last[school_id] = student[i].rk;
                 break;
             }
         }
