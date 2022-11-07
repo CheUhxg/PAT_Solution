@@ -28,13 +28,21 @@ void readInChinese(vector<string>& res, int& num) {
 
 int main() {
     int num; cin >> num;
+    if(num == 0) {
+        cout << "ling" << endl;
+        return 0;
+    }
     vector<string> res;
     bool neg = num < 0;
     num = abs(num);
     for(auto & base : levelC) {
-        if(num % 10000 > 0) readInChinese(res, num);
-        if(num > 0) {
+        readInChinese(res, num);
+        if(num > 0 && num % 10000 > 0) {
             res.emplace_back(base);
+        } else if(num > 0) {
+            res.emplace_back("ling");
+        } else {
+            break;
         }
     }
     reverse(res.begin(), res.end());
