@@ -5,9 +5,10 @@
 using namespace std;
 
 int main() {
-    int n, p; cin >> n >> p;
-    vector<int> num(n);
-    for(int& i : num) {
+    long long p;
+    int n; cin >> n >> p;
+    vector<long long> num(n);
+    for(long long& i : num) {
         cin >> i;
     }
     sort(num.begin(), num.end());
