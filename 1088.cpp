@@ -3,115 +3,80 @@
 using namespace std;
 
 struct Rational {
-    long up = 0, down = 1;
+    int up = 0, down = 1;
 };
 
-char c;
-Rational r1, r2;
-
-inline long gcd(long a, long b) {
-    return b > 0?gcd(b, a%b) : a;
+inline long long gcd(long long a, long long b) {
+    return b == 0 ? a : gcd(b, a % b);
+}
+void rational_show(long long up, long long down) {
+    if (up * down == 0) {
+        if(down == 0)cout << "Inf";
+        else cout << '0';
+        return;
+    }
+    bool isNeg = ((up < 0 && down > 0) || (up > 0 && down < 0));
+    up = abs(up);
+    down = abs(down);
+    long long k = up / down;
+    if(isNeg)cout << "(-";
+    if (k != 0) cout << k;
+    if (up % down == 0) {
+        if(isNeg)cout << ')';
+        return;
+    }
+    if (k != 0)cout << ' ';
+    up = up - k * down;
+    long long gcd_res = gcd(up, down);
+    up /= gcd_res;
+    down /= gcd_res;
+    cout << up << '/' << down;
+    if(isNeg)cout << ')';
 }
 
-void rational_show(Rational& res, char op) {
-    if(r1.up < 0)cout << '(';
-    cout << r1.up;
-    if(r1.up != 0 && r1.down > 1)cout << '/' << r1.down;
-    if(r1.up < 0)cout << ')';
-    cout << ' ' << op << ' ';
-    if(r2.up < 0)cout << '(';
-    cout << r2.up;
-    if(r2.up != 0 && r2.down > 1)cout << '/' << r2.down;
-    if(r2.up < 0)cout << ')';
+void rational_plus(const Rational& r1, const Rational& r2) {
+    rational_show(r1.up, r1.down);
+    cout << " + ";
+    rational_show(r2.up, r2.down);
     cout << " = ";
-    if(res.down == 0)cout << "Inf";
-    else {
-        bool neg = res.up < 0;
-        res.up = abs(res.up);
-        long k = res.up / res.down;
-        res.up %= res.down;
-        if(neg)cout << "(-";
-        if(k > 0) {
-            cout << k;
-            if(res.up != 0)cout << ' ' << res.up;
-        } else cout << res.up;
-        if(res.up != 0 && res.down > 1)cout << '/' << res.down;
-        if(neg)cout << ')';
-    }
+    rational_show(r1.up * r2.down + r2.up * r1.down, r1.down * r2.down);
     cout << endl;
 }
 
-void rational_plus() {
-    Rational res;
-    if(r1.up != 0 && r2.up != 0) {
-        // TODO:maybe out of range
-        res.up = r1.up * r2.down + r2.up * r1.down;
-        res.down = r1.down * r2.down;
-        long gcd_res = gcd(abs(res.up), abs(res.down));
-        res.up /= gcd_res;
-        res.down /= gcd_res;
-    } else if(r1.up == 0) res = r2;
-    else res = r1;
-    rational_show(res, '+');
+void rational_mine(const Rational& r1, const Rational& r2) {
+    rational_show(r1.up, r1.down);
+    cout << " - ";
+    rational_show(r2.up, r2.down);
+    cout << " = ";
+    rational_show(r1.up * r2.down - r2.up * r1.down, r1.down * r2.down);
+    cout << endl;
 }
 
-void rational_mine() {
-    Rational res;
-    if(r1.up != 0 && r2.up != 0) {
-        // TODO:maybe out of range
-        res.up = r1.up * r2.down - r2.up * r1.down;
-        res.down = r1.down * r2.down;
-        long gcd_res = gcd(abs(res.up), abs(res.down));
-        res.up /= gcd_res;
-        res.down /= gcd_res;
-    } else if(r1.up == 0) {
-        res = r2;
-        res.up *= -1;
-    } else res = r1;
-    rational_show(res, '-');
+void rational_mul(const Rational& r1, const Rational& r2) {
+    rational_show(r1.up, r1.down);
+    cout << " * ";
+    rational_show(r2.up, r2.down);
+    cout << " = ";
+    rational_show(r1.up * r2.up, r1.down * r2.down);
+    cout << endl;
 }
 
-void rational_mul() {
-    Rational res;
-    if(r1.up != 0 && r2.up != 0) {
-        // TODO:maybe out of range
-        res.up = r1.up * r2.up;
-        res.down = r1.down * r2.down;
-        long gcd_res = gcd(abs(res.up), abs(res.down));
-        res.up /= gcd_res;
-        res.down /= gcd_res;
-    }
-    rational_show(res, '*');
-}
-
-void rational_div() {
-    Rational res;
-    if(r2.up == 0) {
-        res.down = 0;
-    } else if(r1.up != 0 && r2.up != 0) {
-        // TODO:maybe out of range
-        res.up = r1.up * r2.down;
-        res.down = r1.down * r2.up;
-        if(res.down < 0) {
-            res.up *= -1;
-            res.down *= -1;
-        }
-        long gcd_res = gcd(abs(res.up), abs(res.down));
-        res.up /= gcd_res;
-        res.down /= gcd_res;
-    }
-    rational_show(res, '/');
+void rational_div(const Rational& r1, const Rational& r2) {
+    rational_show(r1.up, r1.down);
+    cout << " / ";
+    rational_show(r2.up, r2.down);
+    cout << " = ";
+    rational_show(r1.up * r2.down, r1.down * r2.up);
+    cout << endl;
 }
 
 int main() {
+    char c;
+    Rational r1, r2;
     cin >> r1.up >> c >> r1.down >> r2.up >> c >> r2.down;
-    long gcd1 = gcd(abs(r1.up), abs(r1.down)), gcd2 = gcd(abs(r2.up),abs(r2.down));
-    r1.up /= gcd1;
-    r1.down /= gcd1;
-    r2.up /= gcd2;
-    r2.down /= gcd2;
-    rational_plus();
-    rational_mine();
-    rational_mul();
-    rational_div();
+    rational_plus(r1, r2);
+    rational_mine(r1, r2);
+    rational_mul(r1, r2);
+    rational_div(r1, r2);
+    return 0;
 }
