@@ -1,9 +1,10 @@
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
 struct Rational {
-    int up = 0, down = 1;
+    long long up = 0, down = 1;
 };
 
 inline long long gcd(long long a, long long b) {
@@ -20,12 +21,12 @@ void rational_show(long long up, long long down) {
     down = abs(down);
     long long k = up / down;
     if(isNeg)cout << "(-";
-    if (k != 0) cout << k;
-    if (up % down == 0) {
+    if(k != 0) cout << k;
+    if(up % down == 0) {
         if(isNeg)cout << ')';
         return;
     }
-    if (k != 0)cout << ' ';
+    if(k != 0)cout << ' ';
     up = up - k * down;
     long long gcd_res = gcd(up, down);
     up /= gcd_res;
