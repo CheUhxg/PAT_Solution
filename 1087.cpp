@@ -4,28 +4,28 @@
 
 using namespace std;
 
-struct Route {
+static struct Route {
     string dst;
     int cost;
 };
 
-struct City {
+static struct City {
     int happy = 0;
     vector<Route>routes;
 };
 
-int min_cost = 0x3fffffff, max_happy = 0, cnt = 0;
-vector<string> res;
-unordered_map<string, int> name2index;
+static int min_cost = 0x3fffffff, max_happy = 0, cnt = 0;
+static vector<string> res;
+static unordered_map<string, int> name2index;
 
-bool isIn(const string& str, const vector<string>&path) {
+static bool isIn(const string& str, const vector<string>&path) {
     for(auto & p : path) {
         if(p == str)return true;
     }
     return false;
 }
 
-void dfs(int index_now, int cost_totle, int happy_totle, vector<string>&path,
+static void dfs(int index_now, int cost_totle, int happy_totle, vector<string>&path,
          const vector<City>& g, const int index_ROM) {
     if(index_now == index_ROM) {
         if(cost_totle < min_cost) {
@@ -55,27 +55,27 @@ void dfs(int index_now, int cost_totle, int happy_totle, vector<string>&path,
     }
 }
 
-int main() {
-    string start, src, dst;
-    int n, k, h; cin >> n >> k >> start; cin.get();
-    name2index[start] = 0;
-    vector<City> g(n);
-    for(int i = 1; i < n; ++i) {
-        cin >> src >> h;
-        name2index[src] = i;
-        g[i].happy = h;
-    }
-    for(int i = 0; i < k; ++i) {
-        cin >> src >> dst >> h;
-        g[name2index[src]].routes.push_back({dst, h});
-        g[name2index[dst]].routes.push_back({src, h});
-    }
-    vector<string>path;
-    dfs(0, 0, 0, path, g, name2index["ROM"]);
-    cout << cnt << ' ' << min_cost << ' ' << max_happy << ' ' << max_happy / res.size() << endl;
-    cout << start;
-    for(auto & str : res) {
-        cout << "->" << str;
-    }
-    cout << endl;
-}
+//int main() {
+//    string start, src, dst;
+//    int n, k, h; cin >> n >> k >> start; cin.get();
+//    name2index[start] = 0;
+//    vector<City> g(n);
+//    for(int i = 1; i < n; ++i) {
+//        cin >> src >> h;
+//        name2index[src] = i;
+//        g[i].happy = h;
+//    }
+//    for(int i = 0; i < k; ++i) {
+//        cin >> src >> dst >> h;
+//        g[name2index[src]].routes.push_back({dst, h});
+//        g[name2index[dst]].routes.push_back({src, h});
+//    }
+//    vector<string>path;
+//    dfs(0, 0, 0, path, g, name2index["ROM"]);
+//    cout << cnt << ' ' << min_cost << ' ' << max_happy << ' ' << max_happy / res.size() << endl;
+//    cout << start;
+//    for(auto & str : res) {
+//        cout << "->" << str;
+//    }
+//    cout << endl;
+//}
