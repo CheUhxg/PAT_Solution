@@ -3,14 +3,15 @@
 
 using namespace std;
 
-struct Rational {
+static struct Rational {
     long long up = 0, down = 1;
 };
 
-inline long long gcd(long long a, long long b) {
+static inline long long gcd(long long a, long long b) {
     return b == 0 ? a : gcd(b, a % b);
 }
-void rational_show(long long up, long long down) {
+
+static void rational_show(long long up, long long down) {
     if (up * down == 0) {
         if(down == 0)cout << "Inf";
         else cout << '0';
@@ -35,7 +36,7 @@ void rational_show(long long up, long long down) {
     if(isNeg)cout << ')';
 }
 
-void rational_plus(const Rational& r1, const Rational& r2) {
+static void rational_plus(const Rational& r1, const Rational& r2) {
     rational_show(r1.up, r1.down);
     cout << " + ";
     rational_show(r2.up, r2.down);
@@ -44,7 +45,7 @@ void rational_plus(const Rational& r1, const Rational& r2) {
     cout << endl;
 }
 
-void rational_mine(const Rational& r1, const Rational& r2) {
+static void rational_mine(const Rational& r1, const Rational& r2) {
     rational_show(r1.up, r1.down);
     cout << " - ";
     rational_show(r2.up, r2.down);
@@ -53,7 +54,7 @@ void rational_mine(const Rational& r1, const Rational& r2) {
     cout << endl;
 }
 
-void rational_mul(const Rational& r1, const Rational& r2) {
+static void rational_mul(const Rational& r1, const Rational& r2) {
     rational_show(r1.up, r1.down);
     cout << " * ";
     rational_show(r2.up, r2.down);
@@ -62,7 +63,7 @@ void rational_mul(const Rational& r1, const Rational& r2) {
     cout << endl;
 }
 
-void rational_div(const Rational& r1, const Rational& r2) {
+static void rational_div(const Rational& r1, const Rational& r2) {
     rational_show(r1.up, r1.down);
     cout << " / ";
     rational_show(r2.up, r2.down);
@@ -71,13 +72,13 @@ void rational_div(const Rational& r1, const Rational& r2) {
     cout << endl;
 }
 
-int main() {
-    char c;
-    Rational r1, r2;
-    cin >> r1.up >> c >> r1.down >> r2.up >> c >> r2.down;
-    rational_plus(r1, r2);
-    rational_mine(r1, r2);
-    rational_mul(r1, r2);
-    rational_div(r1, r2);
-    return 0;
-}
+//int main() {
+//    char c;
+//    Rational r1, r2;
+//    cin >> r1.up >> c >> r1.down >> r2.up >> c >> r2.down;
+//    rational_plus(r1, r2);
+//    rational_mine(r1, r2);
+//    rational_mul(r1, r2);
+//    rational_div(r1, r2);
+//    return 0;
+//}
