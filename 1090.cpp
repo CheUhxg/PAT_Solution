@@ -1,23 +1,29 @@
 #include <iostream>
 #include <cstdio>
 #include <vector>
+#include <unordered_map>
 
 using namespace std;
 
 int cnt, n;
 double p, r, max_p;
+unordered_map<int, double>visited;
 
-void buy(int index, double price, const vector<int>&supp) {
-    if(supp[index] == -1) {
-        if(max_p < price * p) {
-            max_p = price * p;
+double buy(int index, double price, const vector<int>&supp) {
+    if(supp[index] == -1 ||
+        visited.count(supp[index]) > 0) {
+        double more = supp[index] == -1?p:visited[supp[index]];
+        if(max_p < price * more) {
+            max_p = price * more;
             cnt = 1;
-        } else if(max_p == price * p) {
+        } else if(max_p == price * more) {
             ++cnt;
         }
-        return;
+        return price * more;
     }
-    buy(supp[index], price * (1 + r / 100), supp);
+    double res = buy(supp[index], price * (1 + r / 100), supp);
+    visited[supp[index]] = res / price;
+    return res;
 }
 
 int main() {
