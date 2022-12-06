@@ -5,11 +5,11 @@
 
 using namespace std;
 
-int cnt, n;
-double p, r, max_p;
-unordered_map<int, double>visited;
+static int cnt, n;
+static double p, r, max_p;
+static unordered_map<int, double>visited;
 
-double buy(int index, double price, const vector<int>&supp) {
+static double buy(int index, double price, const vector<int>&supp) {
     if(supp[index] == -1 ||
         visited.count(supp[index]) > 0) {
         double more = supp[index] == -1?p:visited[supp[index]];
@@ -26,16 +26,16 @@ double buy(int index, double price, const vector<int>&supp) {
     return res;
 }
 
-int main() {
-    cin >> n >> p >> r;
-    vector<int>supp(n);
-    vector<bool>isSupp(n, false);
-    for(int i = 0; i < n; ++i) {
-        cin >> supp[i];
-        if(supp[i] != -1)isSupp[supp[i]] = true;
-    }
-    for(int i = 0; i < n; ++i) {
-        if(!isSupp[i])buy(i, 1.0, supp);
-    }
-    printf("%.2f %d\n", max_p, cnt);
-}
+//int main() {
+//    cin >> n >> p >> r;
+//    vector<int>supp(n);
+//    vector<bool>isSupp(n, false);
+//    for(int i = 0; i < n; ++i) {
+//        cin >> supp[i];
+//        if(supp[i] != -1)isSupp[supp[i]] = true;
+//    }
+//    for(int i = 0; i < n; ++i) {
+//        if(!isSupp[i])buy(i, 1.0, supp);
+//    }
+//    printf("%.2f %d\n", max_p, cnt);
+//}
