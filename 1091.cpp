@@ -4,13 +4,13 @@
 
 using namespace std;
 
-int m, n, l, t;
+static int m, n, l, t;
 
-struct Point {
+static struct Point {
     int x, y, z;
 };
 
-Point direct[6] = {
+static Point direct[6] = {
     {1, 0, 0},
     {0, 1, 0},
     {0, 0, 1},
@@ -19,7 +19,7 @@ Point direct[6] = {
     {0, 0, -1},
 };
 
-bool isRight(const Point& p,
+static bool isRight(const Point& p,
              const vector<vector<vector<bool>>>& g,
              const vector<vector<vector<bool>>>& visited) {
     if(p.x >= 0 && p.x < m &&
@@ -30,7 +30,7 @@ bool isRight(const Point& p,
     return false;
 }
 
-int bfs(const Point& now,
+static int bfs(const Point& now,
          const vector<vector<vector<bool>>>& g,
          vector<vector<vector<bool>>>& visited) {
     int cnt = 1;
@@ -55,27 +55,27 @@ int bfs(const Point& now,
     return cnt >= t?cnt:0;
 }
 
-int main() {
-    cin >> m >> n >> l >> t;
-    vector<vector<vector<bool>>> g(m, vector<vector<bool>>(n, vector<bool>(l)));
-    vector<vector<vector<bool>>> visited(m, vector<vector<bool>>(n, vector<bool>(l, false)));
-    int cnt;
-    for(int z = 0; z < l; ++z) {
-        for(int x = 0; x < m; ++x) {
-            for(int y = 0; y < n; ++y) {
-                cin >> cnt;
-                g[x][y][z] = cnt;
-            }
-        }
-    }
-    cnt = 0;
-    for(int x = 0; x < m; ++x) {
-        for(int y = 0; y < n; ++y) {
-            for(int z = 0; z < l; ++z) {
-                if(!visited[x][y][z] && g[x][y][z])
-                    cnt += bfs({x, y, z}, g, visited);
-            }
-        }
-    }
-    cout << cnt << endl;
-}
+//int main() {
+//    cin >> m >> n >> l >> t;
+//    vector<vector<vector<bool>>> g(m, vector<vector<bool>>(n, vector<bool>(l)));
+//    vector<vector<vector<bool>>> visited(m, vector<vector<bool>>(n, vector<bool>(l, false)));
+//    int cnt;
+//    for(int z = 0; z < l; ++z) {
+//        for(int x = 0; x < m; ++x) {
+//            for(int y = 0; y < n; ++y) {
+//                cin >> cnt;
+//                g[x][y][z] = cnt;
+//            }
+//        }
+//    }
+//    cnt = 0;
+//    for(int x = 0; x < m; ++x) {
+//        for(int y = 0; y < n; ++y) {
+//            for(int z = 0; z < l; ++z) {
+//                if(!visited[x][y][z] && g[x][y][z])
+//                    cnt += bfs({x, y, z}, g, visited);
+//            }
+//        }
+//    }
+//    cout << cnt << endl;
+//}
